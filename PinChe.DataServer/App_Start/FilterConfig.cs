@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using NFine.Web;
+using System.Web;
 using System.Web.Mvc;
 
 namespace PinChe.DataServer
@@ -7,7 +8,7 @@ namespace PinChe.DataServer
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            filters.Add(new HandlerErrorAttribute());
         }
     }
 }
