@@ -24,6 +24,7 @@ namespace NFine.Data
         int Update(TEntity entity);
         int Delete(TEntity entity);
         int Delete(Expression<Func<TEntity, bool>> predicate);
+        bool Any(Expression<Func<TEntity, bool>> predicate);
         TEntity FindEntity(object keyValue);
         TEntity FindEntity(Expression<Func<TEntity, bool>> predicate);
         IQueryable<TEntity> IQueryable();

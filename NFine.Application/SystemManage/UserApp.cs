@@ -54,6 +54,34 @@ namespace NFine.Application.SystemManage
         {
             service.Update(userEntity);
         }
+        public UserEntity Regster(string username, string password)
+        {
+            if (!service.Any(o=>o.F_Account == username))
+            {
+                UserEntity userEntity = new UserEntity();
+                userEntity.F_Account = username;
+                userEntity.F_CreatorTime = DateTime.Now;
+                userEntity.F_EnabledMark = true;
+                userEntity.F_ManagerId = "1";
+                userEntity.F_SecurityLevel = 0;
+                userEntity.F_RoleId = "1";
+                userEntity.F_IsAdministrator = false;
+                service.Insert(userEntity);
+
+                UserLogOnEntity userLogOnEntity = new UserLogOnEntity();
+                userLogOnEntity.F_UserSecretkey = DateTime.Now.Millisecond.ToString();
+                userLogOnEntity.F_UserPassword = Md5.md5(DESEncrypt.Encrypt(password.ToLower(), userLogOnEntity.F_UserSecretkey).ToLower(), 32).ToLower();
+                userLogOnEntity.F_AllowStartTime = DateTime.Now;
+                userLogOnEntity.F_FirstVisitTime = DateTime.Now;
+                userLogOnEntity.F_LastVisitTime = DateTime.Now;
+                userLogOnApp.UpdateForm(userLogOnEntity);
+                return userEntity;
+            }
+            else
+            {
+                throw new Exception("该账户名已存在，请重新输入");
+            }
+        }
         public UserEntity CheckLogin(string username, string password)
         {
             UserEntity userEntity = service.FindEntity(t => t.F_Account == username);

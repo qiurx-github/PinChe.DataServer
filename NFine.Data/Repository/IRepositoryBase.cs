@@ -22,6 +22,7 @@ namespace NFine.Data
         int Update<TEntity>(TEntity entity) where TEntity : class;
         int Delete<TEntity>(TEntity entity) where TEntity : class;
         int Delete<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class;
+        bool Any<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class;
         TEntity FindEntity<TEntity>(object keyValue) where TEntity : class;
         TEntity FindEntity<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class;
         IQueryable<TEntity> IQueryable<TEntity>() where TEntity : class;

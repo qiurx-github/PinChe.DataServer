@@ -21,9 +21,16 @@ namespace NFine.Application.SystemManage
         }
         public void UpdateForm(UserLogOnEntity userLogOnEntity)
         {
-            service.Update(userLogOnEntity);
+            if (service.Any(o => o.F_Id == userLogOnEntity.F_Id))
+            {
+                service.Update(userLogOnEntity);
+            }
+            else
+            {
+                service.Insert(userLogOnEntity);
+            }
         }
-        public void RevisePassword(string userPassword,string keyValue)
+        public void RevisePassword(string userPassword, string keyValue)
         {
             UserLogOnEntity userLogOnEntity = new UserLogOnEntity();
             userLogOnEntity.F_Id = keyValue;

@@ -187,5 +187,10 @@ namespace NFine.Data
             tempData = tempData.Skip<TEntity>(pagination.rows * (pagination.page - 1)).Take<TEntity>(pagination.rows).AsQueryable();
             return tempData.ToList();
         }
+
+        public bool Any<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class
+        {
+            return dbcontext.Set<TEntity>().Any(predicate);
+        }
     }
 }
