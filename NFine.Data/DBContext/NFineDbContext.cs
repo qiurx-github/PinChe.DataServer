@@ -25,6 +25,7 @@ namespace NFine.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //Database.SetInitializer<NFineDbContext>(new DropCreateDatabaseAlways<NFineDbContext>());
             string assembleFileName = Assembly.GetExecutingAssembly().CodeBase.Replace("NFine.Data.DLL", "NFine.Mapping.DLL").Replace("file:///", "");
             Assembly asm = Assembly.LoadFile(assembleFileName);
             var typesToRegister = asm.GetTypes()

@@ -66,6 +66,7 @@ namespace NFine.Application.SystemManage
                 userEntity.F_SecurityLevel = 0;
                 userEntity.F_RoleId = "1";
                 userEntity.F_IsAdministrator = false;
+                userEntity.F_Id = Guid.NewGuid().ToString();
                 service.Insert(userEntity);
 
                 UserLogOnEntity userLogOnEntity = new UserLogOnEntity();
@@ -74,6 +75,7 @@ namespace NFine.Application.SystemManage
                 userLogOnEntity.F_AllowStartTime = DateTime.Now;
                 userLogOnEntity.F_FirstVisitTime = DateTime.Now;
                 userLogOnEntity.F_LastVisitTime = DateTime.Now;
+                userLogOnEntity.F_Id = Guid.NewGuid().ToString();
                 userLogOnApp.UpdateForm(userLogOnEntity);
                 return userEntity;
             }

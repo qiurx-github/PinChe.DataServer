@@ -26,6 +26,7 @@ namespace NFine.Data
         public int Insert(TEntity entity)
         {
             dbcontext.Entry<TEntity>(entity).State = EntityState.Added;
+            
             return dbcontext.SaveChanges();
         }
         public int Insert(List<TEntity> entitys)

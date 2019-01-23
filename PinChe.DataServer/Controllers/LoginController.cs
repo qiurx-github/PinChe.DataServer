@@ -4,32 +4,30 @@ using NFine.Application.SystemSecurity;
 using NFine.Code;
 using NFine.Domain.Entity.SystemManage;
 using NFine.Domain.Entity.SystemSecurity;
-using NFine.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-//using System.Web.Mvc;
+using System.Web;
+using System.Web.Mvc;
 
 namespace PinChe.DataServer.Controllers
 {
-    public class LoginController : ApiController
+    public class LoginController : Controller
     {
-        public IEnumerable<string> Get()
+        // GET: Login
+        public ActionResult Index()
         {
-            return new string[] { "value1", "value2" };
+            return View();
         }
         [HttpPost]
-       // [HandlerAjaxOnly]
+        // [HandlerAjaxOnly]
         public string Register(string username, string password, string code)
         {
             LogEntity logEntity = new LogEntity();
             logEntity.F_ModuleName = "注册";
             logEntity.F_Type = DbLogType.Login.ToString();
             try
-            {  
+            {
                 UserEntity userEntity = new UserApp().Regster(username, password);
                 if (userEntity != null)
                 {
@@ -52,7 +50,7 @@ namespace PinChe.DataServer.Controllers
             }
         }
         [HttpPost]
-        [HandlerAjaxOnly]
+        //[HandlerAjaxOnly]
         public string CheckLogin(string username, string password, string code)
         {
             LogEntity logEntity = new LogEntity();
