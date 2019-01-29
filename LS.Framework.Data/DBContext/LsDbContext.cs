@@ -10,12 +10,13 @@ namespace LS.Framework.Data
     public class LsDbContext : DbContext
     {
         public LsDbContext()
-            : base("LsDbContext")
+            : base("name=LsDbContext")
         {
             this.Configuration.AutoDetectChangesEnabled = false;
             this.Configuration.ValidateOnSaveEnabled = false;
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;
+            Database.SetInitializer(new DropCreateDatabaseAlways<LsDbContext>());
         }
 
         /// <summary>
@@ -26,16 +27,18 @@ namespace LS.Framework.Data
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //Database.SetInitializer<NFineDbContext>(new DropCreateDatabaseAlways<NFineDbContext>());
-            string assembleFileName = Assembly.GetExecutingAssembly().CodeBase.Replace("LS.Framework.Data.DLL", "NFine.Mapping.DLL").Replace("file:///", "");
-            Assembly asm = Assembly.LoadFile(assembleFileName);
+            //string assembleFileName = Assembly.GetExecutingAssembly().CodeBase.Replace("LS.Framework.Data.DLL", "NFine.Mapping.DLL").Replace("file:///", "");
+            //Assembly asm = Assembly.LoadFile(assembleFileName);
+            Assembly asm = Assembly.Load("LS.Framework.Models");
             var typesToRegister = asm.GetTypes()
             .Where(type => !String.IsNullOrEmpty(type.Namespace))
-            .Where(type => type.BaseType != null && type.BaseType.IsGenericType && type.BaseType.GetGenericTypeDefinition() == typeof(EntityTypeConfiguration<>));
+            .Where(type => type.BaseType != null && type.BaseType == typeof(BaseEntity));
+            //.Where(type => type.BaseType != null && type.BaseType.IsGenericType && type.BaseType.GetGenericTypeDefinition() == typeof(EntityTypeConfiguration<>));
             foreach (var type in typesToRegister)
             {
-                dynamic configurationInstance = Activator.CreateInstance(type);
-                modelBuilder.Configurations.Add(configurationInstance);
+                //dynamic configurationInstance = Activator.CreateInstance(type);
+                //modelBuilder.Configurations.Add(configurationInstance);
+                modelBuilder.RegisterEntityType(type);
             }
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();//移除复数表名的契约

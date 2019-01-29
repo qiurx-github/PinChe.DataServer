@@ -17,6 +17,7 @@ namespace PinChe.DataServer.Controllers
         // GET: Login
         public ActionResult Index()
         {
+
             return View();
         }
         [HttpPost]

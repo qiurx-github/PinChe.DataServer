@@ -276,6 +276,18 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LS.Framework.Data\LS.Framework.Data.csproj">
+      <Project>{B1AA4FE2-4EE4-461E-88BC-21C1C22B6000}</Project>
+      <Name>LS.Framework.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LS.Framework.Models\LS.Framework.Models.csproj">
+      <Project>{25CC3693-F201-447B-8495-CB3A023FFEA1}</Project>
+      <Name>LS.Framework.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LS.Framework.Repository\LS.Framework.Repository.csproj">
+      <Project>{40F29AEB-18F7-43EC-9436-DA3C7D6B13D5}</Project>
+      <Name>LS.Framework.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NFine.Application\NFine.Application.csproj">
       <Project>{F2035EE2-B73D-4FB8-A433-CAB465DE6A2A}</Project>
       <Name>NFine.Application</Name>

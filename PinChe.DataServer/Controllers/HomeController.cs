@@ -1,4 +1,7 @@
-﻿using NFine.Code;
+﻿using LS.Framework.Data;
+using LS.Framework.Models;
+using LS.Framework.Repository.Implementations;
+using NFine.Code;
 using NFine.Web;
 using System;
 using System.Collections.Generic;
@@ -12,6 +15,8 @@ namespace PinChe.DataServer.Controllers
     {
         public ActionResult Index()
         {
+            TestRepository test = new TestRepository();
+            test.InsertTest();
             ViewBag.Title = "Home Page";
 
             return View();
