@@ -27,17 +27,12 @@ namespace LS.Framework.Data
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //string assembleFileName = Assembly.GetExecutingAssembly().CodeBase.Replace("LS.Framework.Data.DLL", "NFine.Mapping.DLL").Replace("file:///", "");
-            //Assembly asm = Assembly.LoadFile(assembleFileName);
             Assembly asm = Assembly.Load("LS.Framework.Models");
             var typesToRegister = asm.GetTypes()
-            .Where(type => !String.IsNullOrEmpty(type.Namespace))
+            .Where(type => !string.IsNullOrEmpty(type.Namespace))
             .Where(type => type.BaseType != null && type.BaseType == typeof(BaseEntity));
-            //.Where(type => type.BaseType != null && type.BaseType.IsGenericType && type.BaseType.GetGenericTypeDefinition() == typeof(EntityTypeConfiguration<>));
             foreach (var type in typesToRegister)
             {
-                //dynamic configurationInstance = Activator.CreateInstance(type);
-                //modelBuilder.Configurations.Add(configurationInstance);
                 modelBuilder.RegisterEntityType(type);
             }
 

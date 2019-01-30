@@ -1,6 +1,4 @@
-﻿
-
-namespace LS.Framework
+﻿namespace LS.Framework
 {
     public class AjaxResult
     {

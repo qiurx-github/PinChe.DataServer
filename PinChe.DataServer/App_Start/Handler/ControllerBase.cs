@@ -1,4 +1,4 @@
-﻿using NFine.Code;
+﻿using LS.Framework;
 using System.Web.Mvc;
 
 namespace NFine.Web
