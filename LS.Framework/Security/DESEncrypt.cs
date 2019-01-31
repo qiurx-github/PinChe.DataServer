@@ -9,7 +9,7 @@ namespace LS.Framework
     /// </summary>
     public class DesEncrypt
     {
-        private static string _desKey = "Mock_desencrypt_2016";
+        private static string _desKey = "Ls_desencrypt_2019";
         #region ========加密========
         /// <summary>
         /// 加密

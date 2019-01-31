@@ -54,7 +54,7 @@ namespace PinChe.DataServer.Controllers
         //    logEntity.F_Type = DbLogType.Login.ToString();
         //    try
         //    {
-        //        //if (Session["nfine_session_verifycode"].IsEmpty() || Md5.md5(code.ToLower(), 16) != Session["nfine_session_verifycode"].ToString())
+        //        //if (Session["ls_session_verifycode"].IsEmpty() || Md5.md5(code.ToLower(), 16) != Session["ls_session_verifycode"].ToString())
         //        //{
         //        //    throw new Exception("验证码错误，请重新输入");
         //        //}

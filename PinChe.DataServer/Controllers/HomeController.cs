@@ -1,13 +1,12 @@
 ﻿using LS.Framework.Data;
 using LS.Framework.Models;
 using LS.Framework.Repository.Implementations;
-using NFine.Code;
-using NFine.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LS.Framework;
 
 namespace PinChe.DataServer.Controllers
 {
@@ -26,7 +25,7 @@ namespace PinChe.DataServer.Controllers
         [HandlerAjaxOnly]
         public string Register(string username, string password, string code)
         {
-            return new AjaxResult { state = password.ToString(), message = username }.ToJson();
+            return new AjaxResult { State = password.ToString(), Message = username }.ToJson();
             //LogEntity logEntity = new LogEntity();
             //logEntity.F_ModuleName = "注册";
             //logEntity.F_Type = DbLogType.Login.ToString();

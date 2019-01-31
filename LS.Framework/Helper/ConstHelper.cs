@@ -9,7 +9,7 @@ namespace LS.Framework
     public static class ConstHelper
     {  
         //范围
-        public const string Region = "redis.Mock.Luo.";//没用
+        public const string Region = "redis.Ls.";//没用
         /// <summary>
         /// 分类详情
         /// </summary>

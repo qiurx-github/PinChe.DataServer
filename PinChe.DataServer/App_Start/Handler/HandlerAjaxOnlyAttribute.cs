@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 
-namespace NFine.Web
+namespace PinChe.DataServer
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class HandlerAjaxOnlyAttribute : ActionMethodSelectorAttribute

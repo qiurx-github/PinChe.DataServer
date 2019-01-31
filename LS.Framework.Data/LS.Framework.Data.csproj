@@ -54,6 +54,8 @@
     <Compile Include="DBContext\LsDbContext.cs" />
     <Compile Include="Extensions\DbHelper.cs" />
     <Compile Include="Extensions\EntityInterfaceExtensions.cs" />
+    <Compile Include="OperatorModel.cs" />
+    <Compile Include="OperatorProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\DbContextFactory.cs" />
     <Compile Include="Repository\IRepositoryBase.cs" />

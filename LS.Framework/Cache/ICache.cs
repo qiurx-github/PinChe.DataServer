@@ -1,11 +1,7 @@
 ﻿using System;
 
 namespace LS.Framework
-{    /// <summary>
-     /// 缓存接口类
-     /// author:luozQ
-     /// date:2017-6-20
-     /// </summary>
+{ 
     public interface ICache
     {
         /// <summary>

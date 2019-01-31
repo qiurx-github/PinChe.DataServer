@@ -1,7 +1,7 @@
-﻿using NFine.Code;
+﻿using LS.Framework;
 using System.Web.Mvc;
 
-namespace NFine.Web
+namespace PinChe.DataServer
 {
     public class HandlerErrorAttribute : HandleErrorAttribute
     {
@@ -10,7 +10,7 @@ namespace NFine.Web
             base.OnException(context);
             context.ExceptionHandled = true;
             context.HttpContext.Response.StatusCode = 200;
-            context.Result = new ContentResult { Content = new AjaxResult { state = ResultType.error.ToString(), message = context.Exception.Message }.ToJson() };
+            context.Result = new ContentResult { Content = new AjaxResult { State = ResultType.Error.ToString(), Message = context.Exception.Message }.ToJson() };
         }
         private void WriteLog(ExceptionContext context)
         {

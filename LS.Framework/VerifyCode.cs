@@ -30,7 +30,7 @@ namespace LS.Framework
                 chkCode += character[rnd.Next(character.Length)];
             }
             //写入Session、
-            WebHelper.WriteSession("Mock_session_verifycode", DesEncrypt.Encrypt(chkCode.ToLower()));
+            WebHelper.WriteSession("Ls_session_verifycode", DesEncrypt.Encrypt(chkCode.ToLower()));
             //创建画布
             Bitmap bmp = new Bitmap(codeW, codeH);
             Graphics g = Graphics.FromImage(bmp);
