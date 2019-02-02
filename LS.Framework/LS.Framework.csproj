@@ -98,7 +98,7 @@
     <Compile Include="File\FileHelper.cs" />
     <Compile Include="GZip.cs" />
     <Compile Include="Helper\ConstHelper.cs" />
-    <Compile Include="Helper\FileHelper.cs" />
+    <Compile Include="Helper\CookieHelper.cs" />
     <Compile Include="Helper\IRedisHelper.cs" />
     <Compile Include="Helper\JsonHelper.cs" />
     <Compile Include="Helper\RedisHelper.cs" />
