@@ -33,7 +33,7 @@ namespace LS.Framework.Models
         [MaxLength(30, ErrorMessage = "RealName请小于30位")]
         public string RealName { get; set; }
 
-        public bool Sex { get; set; }
+        public int Sex { get; set; }
 
         [MaxLength(100, ErrorMessage = "Province请小于100位")]
         public string Province { get; set; }

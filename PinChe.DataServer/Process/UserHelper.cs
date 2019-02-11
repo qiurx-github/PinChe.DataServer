@@ -34,10 +34,15 @@ namespace PinChe.DataServer.Process
             }
         }
 
-        //public static int GetLoginId()
-        //{
-        //    string uid = CookieHelper.GetCookieValue(_CookieUId);
-        //    string checkedmd5 = CookieHelper.getcoo
-        //}
+        public static int GetLoginId()
+        {
+            string uid = CookieHelper.GetCookieValue(_CookieUId);
+            return string.IsNullOrWhiteSpace(uid) ? 0 : Convert.ToInt32(uid);
+        }
+
+        public static void ExitLogin()
+        {
+            CookieHelper.RemoveCookie(_CookieUId, "");
+        }
     }
 }

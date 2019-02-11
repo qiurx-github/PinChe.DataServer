@@ -128,7 +128,9 @@
     <Compile Include="VerifyCode.cs" />
     <Compile Include="Web\AjaxResult.cs" />
     <Compile Include="Web\Enums.cs" />
+    <Compile Include="Web\GenericResult.cs" />
     <Compile Include="Web\Pagination.cs" />
+    <Compile Include="Web\RequestHelper.cs" />
     <Compile Include="Web\TreeGrid\TreeGrid.cs" />
     <Compile Include="Web\TreeGrid\TreeGridModel.cs" />
     <Compile Include="Web\TreeQuery.cs" />

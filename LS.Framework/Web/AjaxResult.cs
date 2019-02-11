@@ -1,5 +1,8 @@
-﻿namespace LS.Framework
+﻿using System;
+
+namespace LS.Framework
 {
+    [Serializable]
     public class AjaxResult
     {
         /// <summary>
@@ -15,18 +18,27 @@
         /// </summary>
         public object Data { get; set; }
 
-        public static AjaxResult Info(string message, object data, string state)
+        public AjaxResult()
+        {
+
+        }
+
+        public static AjaxResult Info(object data, string message, string state)
         {
             return new AjaxResult { State = state, Message = message, Data = data };
         }
 
+        public static AjaxResult Info(string message, object data = null)
+        {
+            return Info(data, message, ResultType.Info.ToString());
+        }
         public static AjaxResult Success(string message, object data = null)
         {
-            return Info(message, data, ResultType.Success.ToString());
+            return Info(data, message, ResultType.Success.ToString());
         }
         public static AjaxResult Error(string message, object data = null)
         {
-            return Info(message, data, ResultType.Error.ToString());
+            return Info(data, message, ResultType.Error.ToString());
         }
 
     }
@@ -36,17 +48,17 @@
     public enum ResultType
     {
         /// <summary>
-        /// 警告结果类型
+        /// 异常结果类型
         /// </summary>
-        Warning,
+        Error = -1,
         /// <summary>
         /// 成功结果类型
         /// </summary>
-        Success,
+        Success = 0,
         /// <summary>
-        /// 异常结果类型
+        /// 警告结果类型
         /// </summary>
-        Error,
+        Warning,
         /// <summary>
         /// 消息结果类型
         /// </summary>

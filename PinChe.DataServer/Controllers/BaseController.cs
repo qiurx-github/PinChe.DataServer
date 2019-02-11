@@ -1,9 +1,11 @@
 ﻿using LS.Framework;
 using LS.Framework.Data;
 using LS.Framework.Models;
+using PinChe.DataServer.Process;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -24,8 +26,71 @@ namespace PinChe.DataServer.Controllers
 
             WorkContext.Controller = RouteData.Values["controller"].ToString().ToLower();
             WorkContext.Action = RouteData.Values["action"].ToString().ToLower();
+
+            string m_id = RequestHelper.GetString("m_id", "");
+            string m_checkmd5 = RequestHelper.GetString("m_token", "");
+            if (!string.IsNullOrWhiteSpace(m_id)&&!string.IsNullOrWhiteSpace(m_checkmd5))
+            {
+                WorkContext.UserID = UserHelper.GetLoginId();
+            }
         }
 
+        public ActionResult JsonAndJsonP(object data)
+        {
+            string callback = RequestHelper.GetString("callback","");
+            if (string.IsNullOrWhiteSpace(callback))
+            {
+                return Jsonp(data, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult JsonAndJsonP(AjaxResult ajaxResult, string message)
+        {
+            ajaxResult.Message = message;
+            return JsonAndJsonP(ajaxResult);
+        }
+        #region Jsonp
+        protected JsonpResult Jsonp(object data, string JsonpHostPattern = "")
+        {
+            return this.Jsonp(data, null, null, JsonRequestBehavior.DenyGet, JsonpHostPattern);
+        }
+
+        protected JsonpResult Jsonp(object data, string contentType, string JsonpHostPattern = "")
+        {
+            return this.Jsonp(data, contentType, null, JsonRequestBehavior.DenyGet, JsonpHostPattern);
+        }
+
+        protected virtual JsonpResult Jsonp(object data, string contentType, Encoding contentEncoding, string JsonpHostPattern = "")
+        {
+            return this.Jsonp(data, contentType, contentEncoding, JsonRequestBehavior.DenyGet, JsonpHostPattern);
+        }
+
+        protected JsonpResult Jsonp(object data, JsonRequestBehavior behavior, string JsonpHostPattern = "")
+        {
+            return this.Jsonp(data, null, null, behavior, JsonpHostPattern);
+        }
+
+        protected JsonpResult Jsonp(object data, string contentType, JsonRequestBehavior behavior, string JsonpHostPattern = "")
+        {
+            return this.Jsonp(data, contentType, null, behavior, JsonpHostPattern);
+        }
+
+        protected virtual JsonpResult Jsonp(object data, string contentType, Encoding contentEncoding, JsonRequestBehavior behavior, string JsonpHostPattern = "")
+        {
+            return new JsonpResult
+            {
+                Data = data,
+                ContentType = contentType,
+                ContentEncoding = contentEncoding,
+                JsonRequestBehavior = behavior,
+                JsonpHostPattern = JsonpHostPattern
+            };
+        } 
+        #endregion
     }
 
     /// <summary>
@@ -33,8 +98,8 @@ namespace PinChe.DataServer.Controllers
     /// </summary>
     public class WorkContext
     {
-        public bool IsLogin { get { return UserID > 0; } }
-        public bool IsNoLogin { get { return UserID == 0; } }
+        public bool IsLogin => UserID > 0;
+        public bool IsNoLogin => UserID == 0;
         public bool IsHttpAjax;//当前请求是否为ajax请求
 
         public string Controller;//控制器
@@ -58,23 +123,23 @@ namespace PinChe.DataServer.Controllers
             {
                 if (IsNoLogin) return false;
 
-                if (KdUser.Mobile.Contains("1895056")) return true;
+                if (User.Mobile.Contains("1895056")) return true;
 
                 string[] phones = { "18950569828", "15259166314", "18859350069" };
 
-                return phones.Contains(KdUser.Mobile);
+                return phones.Contains(User.Mobile);
             }
         }
 
         private User _user = null;
-        public User KdUser
+        public User User
         {
             get
             {
                 if (_user != null) return _user;
 
                 if (UserID == 0) return null;
-
+                Console.WriteLine("PinChe.DataServer.Controllers=>BaseController=>WorkContext=>User");
                 //_user = new BizKdUser().GetRecordCache(UserID);
 
                 return _user;

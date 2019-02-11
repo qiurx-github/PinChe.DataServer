@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="Implementations\StoreInfoRepository.cs" />
     <Compile Include="Implementations\TestRepository.cs" />
+    <Compile Include="Implementations\UserRepository.cs" />
     <Compile Include="Interface\ITestRepository.cs" />
+    <Compile Include="Interface\IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

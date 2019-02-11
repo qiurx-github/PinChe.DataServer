@@ -374,14 +374,14 @@ namespace LS.Framework
         /// <returns></returns>
         public static string Formatstr(string html)
         {
-            System.Text.RegularExpressions.Regex regex1 = new System.Text.RegularExpressions.Regex(@"<script[\s\S]+</script *>", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-            System.Text.RegularExpressions.Regex regex2 = new System.Text.RegularExpressions.Regex(@" href *= *[\s\S]*script *:", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-            System.Text.RegularExpressions.Regex regex3 = new System.Text.RegularExpressions.Regex(@" on[\s\S]*=", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-            System.Text.RegularExpressions.Regex regex4 = new System.Text.RegularExpressions.Regex(@"<iframe[\s\S]+</iframe *>", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-            System.Text.RegularExpressions.Regex regex5 = new System.Text.RegularExpressions.Regex(@"<frameset[\s\S]+</frameset *>", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-            System.Text.RegularExpressions.Regex regex10 = new System.Text.RegularExpressions.Regex(@"select", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-            System.Text.RegularExpressions.Regex regex11 = new System.Text.RegularExpressions.Regex(@"update", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-            System.Text.RegularExpressions.Regex regex12 = new System.Text.RegularExpressions.Regex(@"delete", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            Regex regex1 =  new Regex(@"<script[\s\S]+</script *>", RegexOptions.IgnoreCase);
+            Regex regex2 =  new Regex(@" href *= *[\s\S]*script *:",RegexOptions.IgnoreCase);
+            Regex regex3 =  new Regex(@" on[\s\S]*=", RegexOptions.IgnoreCase);
+            Regex regex4 =  new Regex(@"<iframe[\s\S]+</iframe *>", RegexOptions.IgnoreCase);
+            Regex regex5 =  new Regex(@"<frameset[\s\S]+</frameset *>", RegexOptions.IgnoreCase);
+            Regex regex10 = new Regex(@"select", RegexOptions.IgnoreCase);
+            Regex regex11 = new Regex(@"update", RegexOptions.IgnoreCase);
+            Regex regex12 = new Regex(@"delete", RegexOptions.IgnoreCase);
             html = regex1.Replace(html, ""); //过滤<script></script>标记
             html = regex2.Replace(html, ""); //过滤href=javascript: (<A>) 属性
             html = regex3.Replace(html, " _disibledevent="); //过滤其它控件的on...事件

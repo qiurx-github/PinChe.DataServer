@@ -16,7 +16,6 @@ namespace LS.Framework.Data
             this.Configuration.ValidateOnSaveEnabled = false;
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;
-            Database.SetInitializer(new DropCreateDatabaseAlways<LsDbContext>());
         }
 
         /// <summary>
@@ -26,7 +25,17 @@ namespace LS.Framework.Data
         /// </summary>
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
+        {   
+            //一：数据库不存在时重新创建数据库[默认]
+            //Database.SetInitializer(new CreateDatabaseIfNotExists<BaseDBContext>());
+            //二：每次启动应用程序时创建数据库
+            //Database.SetInitializer(new DropCreateDatabaseAlways<BaseDBContext>());
+            //策略三：模型更改时重新创建数据库
+#if DEBUG
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<LsDbContext>());
+#endif
+            //策略四：从不创建数据库
+            //Database.SetInitializer<BaseDBContext>(null);
             Assembly asm = Assembly.Load("LS.Framework.Models");
             var typesToRegister = asm.GetTypes()
             .Where(type => !string.IsNullOrEmpty(type.Namespace))
