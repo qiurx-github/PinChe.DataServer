@@ -1,6 +1,7 @@
 ﻿using LS.Framework;
 using LS.Framework.Data;
 using LS.Framework.Models;
+using PinChe.DataServer.App_Start.Handler;
 using PinChe.DataServer.Process;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ using System.Web.Routing;
 
 namespace PinChe.DataServer.Controllers
 {
+    [AllowCrossSiteJson]
     public class BaseController : Controller
     {
         public WorkContext WorkContext => new WorkContext();

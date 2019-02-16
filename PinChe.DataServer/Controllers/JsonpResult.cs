@@ -66,7 +66,7 @@ namespace PinChe.DataServer.Controllers
                 {
                     javaScriptSerializer.RecursionLimit = this.RecursionLimit.Value;
                 }
-                response.Write(HttpUtility.UrlEncode(text2) + "(" + javaScriptSerializer.Serialize(this.Data) + ")");
+                response.Write(HttpUtility.UrlEncode(text2) + javaScriptSerializer.Serialize(this.Data));
             }
         }
     }
