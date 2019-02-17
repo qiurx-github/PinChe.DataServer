@@ -1,6 +1,8 @@
 ﻿using LS.Framework;
 using LS.Framework.Data;
 using LS.Framework.Models;
+using LS.Framework.Repository.Implementations;
+using LS.Framework.Repository.Interface;
 using PinChe.DataServer.App_Start.Handler;
 using PinChe.DataServer.Process;
 using System;
@@ -16,7 +18,18 @@ namespace PinChe.DataServer.Controllers
     [AllowCrossSiteJson]
     public class BaseController : Controller
     {
-        public WorkContext WorkContext => new WorkContext();
+        private WorkContext _workContext;
+        public WorkContext WorkContext
+        {
+            get
+            {
+                if (_workContext == null)
+                {
+                    _workContext = new WorkContext();
+                }
+                return _workContext;
+            }
+        }
         public OperatorProvider op => OperatorProvider.Provider;
         protected override void Initialize(RequestContext requestContext)
         {
@@ -33,8 +46,9 @@ namespace PinChe.DataServer.Controllers
             string m_checkmd5 = RequestHelper.GetString("m_token", "");
             if (!string.IsNullOrWhiteSpace(m_id)&&!string.IsNullOrWhiteSpace(m_checkmd5))
             {
-                WorkContext.UserID = UserHelper.GetLoginId();
+                //WorkContext.UserID = UserHelper.GetLoginId();
             }
+            WorkContext.UserID = UserHelper.GetLoginId();
         }
 
         public ActionResult JsonAndJsonP(object data)
@@ -100,6 +114,7 @@ namespace PinChe.DataServer.Controllers
     /// </summary>
     public class WorkContext
     {
+        private readonly IUserRepository _userService = new UserRepository();
         public bool IsLogin => UserID > 0;
         public bool IsNoLogin => UserID == 0;
         public bool IsHttpAjax;//当前请求是否为ajax请求
@@ -142,7 +157,7 @@ namespace PinChe.DataServer.Controllers
 
                 if (UserID == 0) return null;
                 Console.WriteLine("PinChe.DataServer.Controllers=>BaseController=>WorkContext=>User");
-                //_user = new BizKdUser().GetRecordCache(UserID);
+                _user = _userService.FindEntity(u=>u.Id == UserID);
 
                 return _user;
             }
