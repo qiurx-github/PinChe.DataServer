@@ -10,7 +10,7 @@ namespace PinChe.DataServer
             base.OnException(context);
             context.ExceptionHandled = true;
             context.HttpContext.Response.StatusCode = 200;
-            context.Result = new ContentResult { Content = new AjaxResult { State = ResultType.Error.ToString(), Message = context.Exception.Message }.ToJson() };
+            context.Result = new ContentResult { Content = AjaxResult.Error(context.Exception.Message).ToJson() };
         }
         private void WriteLog(ExceptionContext context)
         {

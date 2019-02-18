@@ -66,7 +66,7 @@ namespace PinChe.DataServer.Controllers
 
         public ActionResult JsonAndJsonP(AjaxResult ajaxResult, string message)
         {
-            ajaxResult.Message = message;
+            ajaxResult.message = message;
             return JsonAndJsonP(ajaxResult);
         }
         #region Jsonp

@@ -24,8 +24,11 @@ namespace PinChe.DataServer.App_Start.Handler
             {
                 if (item.Contains(filterContext.RequestContext.HttpContext.Request.UrlReferrer.Host))
                 {
+                    //严格判断和配置，防止cros漏洞攻击
+                    filterContext.RequestContext.HttpContext.Response.AddHeader("Vary", "Origin");
                     filterContext.RequestContext.HttpContext.Response.AddHeader("Access-Control-Allow-Origin", item);
                     filterContext.RequestContext.HttpContext.Response.AddHeader("Access-Control-Allow-Credentials", "true");
+                    filterContext.RequestContext.HttpContext.Response.AddHeader("Access-Control-Allow-Methods", "POST, GET");
                     break;
                 }
             }

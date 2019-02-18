@@ -34,7 +34,7 @@ namespace PinChe.DataServer
                 }
                 else
                 {
-                    AjaxResult amm = AjaxResult.Info("很抱歉！您的权限不足，访问被拒绝！", "", ResultType.Nopermission.ToString());
+                    AjaxResult amm = AjaxResult.Info("很抱歉！您的权限不足，访问被拒绝！", "", ResultType.Nopermission);
                     filterContext.HttpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;//无权限状态码  
                     filterContext.Result = new JsonResult { Data = amm, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 

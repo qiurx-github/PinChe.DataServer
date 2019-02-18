@@ -8,37 +8,37 @@ namespace LS.Framework
         /// <summary>
         /// 操作结果类型
         /// </summary>
-        public string State { get; set; }
+        public int state { get; set; }
         /// <summary>
         /// 获取 消息内容
         /// </summary>
-        public string Message { get; set; }
+        public string message { get; set; }
         /// <summary>
         /// 获取 返回数据
         /// </summary>
-        public object Data { get; set; }
+        public object data { get; set; }
 
         public AjaxResult()
         {
 
         }
 
-        public static AjaxResult Info(object data, string message, string state)
+        public static AjaxResult Info(object data, string message, ResultType state)
         {
-            return new AjaxResult { State = state, Message = message, Data = data };
+            return new AjaxResult { state = (int)state, message = message, data = data };
         }
 
         public static AjaxResult Info(string message, object data = null)
         {
-            return Info(data, message, ResultType.Info.ToString());
+            return Info(data, message, ResultType.Info);
         }
         public static AjaxResult Success(string message, object data = null)
         {
-            return Info(data, message, ResultType.Success.ToString());
+            return Info(data, message, ResultType.Success);
         }
         public static AjaxResult Error(string message, object data = null)
         {
-            return Info(data, message, ResultType.Error.ToString());
+            return Info(data, message, ResultType.Error);
         }
 
     }
