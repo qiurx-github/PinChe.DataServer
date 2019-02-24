@@ -26,7 +26,7 @@ namespace PinChe.DataServer.Controllers
             }
             WorkContext.User.SaveLogin(true);
 
-            return JsonAndJsonP(AjaxResult.Success("登录成功"));
+            return JsonAndJsonP(AjaxResult.Success("登录成功",WorkContext.User.ToJson()));
         }
         public ActionResult Regist(string mobile, string smsCode, string password, string source = "", int inviteID = 0)
         {           
@@ -116,7 +116,7 @@ namespace PinChe.DataServer.Controllers
             }
 
             user.SaveLogin(true);
-            return JsonAndJsonP(AjaxResult.Success("登录成功", user));
+            return JsonAndJsonP(AjaxResult.Success("登录成功", WorkContext.User.ToJson()));
         }
 
         public ActionResult ResetPwd(string password)
