@@ -116,6 +116,7 @@ namespace PinChe.DataServer.Controllers
             }
 
             user.SaveLogin(true);
+            WorkContext.UserID = user.Id;
             return JsonAndJsonP(AjaxResult.Success("登录成功", WorkContext.User.ToJson()));
         }
 

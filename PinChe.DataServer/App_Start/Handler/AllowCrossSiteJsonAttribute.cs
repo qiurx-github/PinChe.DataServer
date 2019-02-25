@@ -22,7 +22,8 @@ namespace PinChe.DataServer.App_Start.Handler
         {
             foreach (var item in domains)
             {
-                if (item.Contains(filterContext.RequestContext.HttpContext.Request.UrlReferrer.Host))
+                if (filterContext.RequestContext.HttpContext.Request.UrlReferrer != null 
+                    && item.Contains(filterContext.RequestContext.HttpContext.Request.UrlReferrer.Host))
                 {
                     //严格判断和配置，防止cros漏洞攻击
                     filterContext.RequestContext.HttpContext.Response.AddHeader("Vary", "Origin");
